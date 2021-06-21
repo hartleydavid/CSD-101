@@ -1,0 +1,80 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #5 Part Two - Pennies for Pay</title>
+            <script type="text/javascript">
+                
+                /* The function will fill out the number of days and the earnings per day 
+                 * from the users input for the number of days
+                 * The function will add all of the days worth of earning to a final
+                 * net total and display the total
+                 * 
+                 *@param totalDays: The total days for calculating the pennies and sum of earnings
+                 */
+                function fillTable(totalDays){
+                    //pay is the days worth of pay (Doubles each day)
+                    //totalPay is the net amount of money earned after every day
+                    var pay , totalPay;
+                    pay = 0.01;//set to start amount
+                    totalPay = 0;
+                    daysInput = checkNum(totalDays);
+                    //For days 0 to input
+                    for (day = 1; day <= totalDays; day++){
+                        document.write("<tr>");
+                        //New column with Day
+                        document.write("<td>"+day+"</td>");
+                        //New column with Days Pay
+                        document.write("<td>$"+(pay)+"</td>");
+                        document.write("</tr>");
+                        //Add the days worth of pay to the total
+                        totalPay += pay;
+                        //Double the pennies for the next day
+                        pay*=2;
+                    }
+                    //Display the total amount earned over the number of days from input
+                    document.write("<caption align=\"bottom\"> <b>The total amount is $" 
+                                    + totalPay.toFixed(2) + "</b></caption>");
+                }
+
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return: INVALID if it's an invalid input, 
+                 *          The value if the number is valid      
+                 */
+                 function checkNum(inputNum){
+                    if(inputNum < 0 || isNaN(inputNum)){
+                        window.alert("INVALID INPUT \n PLEASE REFRESH PAGE");
+                        return "INVALID";
+                    }
+                    return inputNum;
+                }
+            </script>
+        </head>
+    <body>
+        <h2>Pennies for Pay</h2>
+        <!--Dynamic Table-->
+        <table width="225" border="1">
+            <tr>
+                <!--Table Headers-->
+                <th>Day Number</th>
+                <th>Days Pay</th>
+            </tr>
+            <script type = "text/javascript">
+                //The user input for the number of days
+                var daysInput = parseInt(prompt("Please Enter the Number of Days","0"));
+                //Fill the table with each days earning and total amount earned
+                fillTable(daysInput);
+            </script>
+        </table>
+     </body>
+</html> 
+
+
+
+

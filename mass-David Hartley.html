@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <title> Assignment #4 - Mass</title>
+        <meta charset="utf-8" >
+
+        <script type="text/javascript">
+            /* Method asks the user for input of a mass value to convert to weight
+             * Converts the weight and then checks if the object is considered too
+             * light or heavy
+             * @param mass: The mass input from the user
+             */
+            function calculateWeight(mass){
+                //Calculated weight from mass (mass * earths gravity constant)
+                var weight = parseFloat(mass) * 9.8;
+                //if the weight is in a good range, display the weight in newtons
+                if(testWeight(weight)){
+                    displayWeightCalculations(mass, weight);
+                }
+                
+            }            
+            /* Tests if the weight of the object is over 10 Newtons and under 1000 newtons 
+             *@param weight: The weight value that is calulated from the users mass input
+             *@return: true -if the weight is within range
+             *         false-if the wight is out of range
+             */
+            function testWeight(weight){
+                //Exit case -- if inbetween the weight range
+                if (weight < 1000 && weight > 10) return true;
+                //if the object is overweight
+                if(weight > 1000){
+                    window.alert("The object is too Heavy \nPlease be under 1000N");
+                //if the object is underweight
+                }else if(weight < 10){
+                    window.alert("The object is too Light \n  Please be over 10N");
+                }
+                //return false if not in range
+                return false;
+            }
+            /* Displays the users mass input along with the calulated Weight of the object
+             *@param mass: the mass value from input. Will be displayed in mass line
+             *@param weight: the weight value calculated from the mass. Will diaplay in the 
+                            weight of object Line
+             */
+            function displayWeightCalculations(mass, weight){
+                //Display info.
+                document.write("<h4>Your mass input: " + mass + "kg </h4>");
+                //I have it toFixed() to one decimal point as there's a rounding problem and outputs
+                //the weight with several zeros which is unnecessary.
+                document.write("<h4>The Weight of the object in Newtons: " + weight.toFixed(1) + "N </h4>")
+            }
+
+        </script>
+    </head>
+
+    <body> 
+        <h3>Mass in Kilograms to Weight in Newtons</h3>
+        <script type="text/javascript">
+            //prompt the user to enter a mass value and enter the value in the method
+            calculateWeight(prompt("Enter a Mass Value","10"));
+        </script>		
+    </body>
+</html>

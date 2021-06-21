@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- David Hartley -->
+    <meta charset="UTF-8" />
+    <title>Enterable Table</title>
+
+    <script type="text/javascript">
+
+        /*  
+          This function publishes one table data element in a table and gives it an ID
+          of the form RnCm where 'n' is the row number and 'm' is the column number.
+          for example, R3C7 would be the table data element for row 3, column 7.
+          Note: the numbers in the ID are 1-based, not 0-based.  So, R1C1, is the first
+          element in the table.
+        */
+        function publish_table_square(row, col) {
+            document.write('<td id="R' + row + 'C' + col + '">*</td>');
+        }
+
+        /*
+          This function publishes one row in a table where each element has its own ID.
+          The first argument is the row number and the second argument is the number of columns
+          that the row should have
+        */
+
+        function publish_table_row(row, nCols) {
+            document.write('<tr>');
+            for (var ic = 1; ic <= nCols; ic++) {
+                publish_table_square(row, ic);
+            }
+            document.write('</tr>');
+        }
+
+        /*
+            Put a comment here and write your version of the function
+            publish_table.  Note: you will have to figure out how many arguments this
+            function should take.
+        */
+        //Publishes the table
+        //rows is the num of rows, cols in num of cols
+        function publish_table(rows, cols) {
+            for (rowNum = 1; rowNum <= rows; rowNum++) {
+                publish_table_row(rowNum, cols);//create row
+            }
+        }
+
+        //Loops until theres a repeat in choosing a random cell
+        function goUntilReselection(rows, cols){
+            var didReselect = false;
+            //While there is no repeat cell
+            while(!didReselect){
+                var randomRow = Math.floor(Math.random() * rows + 1);// random row
+                var randomColumn = Math.floor(Math.random() * cols + 1); //random cell
+                //get the cell object
+                var cell = document.getElementById('R' + randomRow + 'C' + randomColumn);;
+                //if the cell has a * 
+                if(isNaN(cell.innerHTML)){
+                    //change to cell value
+                    cell.innerHTML = ((randomRow-1) * cols) + randomColumn;
+                }else{//if it has a number
+                    didReselect = true;//end loop
+                    alert("REPEAT");//alert user of a repeat value
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <table border="1" width="50%">
+        <caption>Random Table</caption>
+
+        <script type="text/javascript">
+
+            var headings = new Array('One', 'Two', 'Three', 'Four', 'Five', 'Six',
+                'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve');
+            var nRows = parseInt(prompt("Enter number of rows: ", "10"));
+            var nCols = parseInt(prompt("Enter number of columns: ", "6"));
+
+            if (nRows > 0 && nRows <= 12 && nCols > 0 && nCols <= 12) {
+                document.write('<tr>');
+                for (var i = 0; i < nCols; i++) {
+                    document.write('<th>' + headings[i] + '</th>');
+                }
+                document.write('</tr>');
+
+                /*
+                    Write your code to publish the table here and then populate the squares
+                    until you get to a square that has already been updated.
+                */
+                //publish cell objects
+                publish_table(nRows, nCols);
+                //Perform program task
+                goUntilReselection(nRows, nCols);
+            }
+            else {
+                alert('Please pick numbers between 1 and 12');
+            }
+
+        </script>
+    </table>
+</body>
+
+</html>

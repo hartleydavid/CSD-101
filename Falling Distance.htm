@@ -1,0 +1,58 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #6 - Falling Distance </title>
+
+            <script type="text/javascript">
+            var EARTH_GRAVITY_CONSTANT = 9.8;
+            /* The function calculates the distance of an object 
+             * falling based from the time interval
+             * @ param t: The time to calculate the distance
+             * @return: The distance the object fell in meters after the time interval
+             */
+            function fallingDistance(t){
+                // (1/2)gt^2
+                return 0.5 * EARTH_GRAVITY_CONSTANT * Math.pow(t,2);
+            }
+            /* Displays a table for the distance measurements for seconds
+             * 1 through 10. 
+             */
+            function displayTableInfo(){
+                //For seconds 1 -10
+                for(var seconds = 1; seconds <=10; seconds++){
+                    document.write("<tr>");
+                        //New column with seconds
+                        document.write("<td>"+ seconds +"</td>");
+                        //New column with Distance - Rounds to a decimal point.
+                        // Floating point errors that output several zeros that aren't needed
+                        //All integer seconds values will have one value past the decimal point
+                        document.write("<td>"+(fallingDistance(seconds).toFixed(1))+"</td>");
+                        document.write("</tr>");
+                }
+
+            }
+            </script>
+
+        </head>
+    <body>
+
+        <!--Create Table-->
+        <table width="225" border="1">
+            <tr>
+                <!--Table Headers-->
+                <th>Time (in seconds)</th>
+                <th>Distance (in meters)</th>
+                <!--Display Table-->
+                <script type="text/javascript">displayTableInfo();</script>
+            </tr>
+    </body>
+</html> 
+
+
+
+

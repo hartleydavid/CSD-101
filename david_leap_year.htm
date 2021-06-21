@@ -1,0 +1,62 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Midterm - Leap Year</title>
+
+            <script type="text/javascript">
+            /* Function checks if the year from input is within the 0 to 3000 range
+             * if not set year to 0 by deafault
+             *@return: The year from input
+             *         The year 0 if invalid input
+             */
+            function checkYearRange(year){
+                if(year >= 0 && year <= 3000){
+                    return year;
+                }
+                //Tell user for invalid input
+                window.alert("INVALID RANGE MUST BE BETWEEN 0 and 3000" +
+                        "\n Please refresh page - Input will be replaced by 0")
+                return "0";
+            }
+            /* Functions calculates if the year provided is a leap year or not
+             * @param int year: The year from input
+             * @return: True if the year is a leap year
+             *          False if the year is NOT a leap year
+            */
+            function isLeapYear(year){
+                /*If divisbile evenly by both 100 and 400
+                 * Or if not divisible by 100 evenly but divisible by 4 evenly
+                 *The first set of arguemnt short curcuits the other as it has more
+                 *precedence than the other set
+                 */
+                return (year % 100 == 0 && year % 400 == 0) 
+                        || (!(year % 100 == 0) && year %4 == 0);
+            }
+            </script>
+
+        </head>
+    <body>
+        <h2>Leap Year Detector</h2>
+        <script type="text/javascript">      
+            //Prompt user
+            var yearInput = parseInt(prompt("Please enter a year betwwen 0-3000", "0"));
+            yearInput = checkYearRange(yearInput);//check if valid
+            //If leap year
+            if(isLeapYear(yearInput)){
+                document.write("The year " + yearInput + " is a leap Year!");
+            }else{ // if not leap year
+                document.write("The year " + yearInput + " is NOT a leap Year!");
+            }
+        </script>
+        
+    </body>
+</html> 
+
+
+
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <title>Assignment Number 2</title>   
+    </head>
+
+    <body>
+
+        <h4>
+            <!--
+                JavaScript that prompts the user for input  
+                Retains the input and displays it
+            -->
+            <script type="text/javascript">
+                //String the takes the input for the name question input
+                name = prompt("Please Enter your name:", "Enter");
+                //String that resembles the address inputed by the user
+                address = prompt("Please enter your address:", "Enter");
+                document.write("We recieved the following information: </br>");
+                //Display User Input
+                document.write("Your name is: " + name + "</br>");
+                document.write("Your address is: " + address + "</br>");
+            </script>
+        </h4>
+
+        <h1>Getting to Know You Better</h1>
+        <!-- Getting to know you form, double breaks after each input box-->
+        <form name="GettingToKnowYouBetter" id="GettingToKnowYouBetter">
+            <!-- Color Input Box-->
+            Your Favorite Color <input id="color" name="color" type="text" size="30"/>
+        </br></br>
+            <!-- Season Input Box-->
+            Your Favorite Season <input id="season" name="season" type="text" size="20"/>
+        </br></br>            
+            <!-- Number Input Box-->
+            Your Lucky Number <input id="number" name="number" type="text" size="10"/>
+        </br></br>
+            <!-- Holiday Input Box-->
+            Your Favorite Holiday <input id="holiday" name="holiday" type="text" size="50"/>
+        </br></br>
+            <!-- Buttons for the form-->
+            <!--Normal Button-->
+            <input type="button" id="normalButton" value="Just a Button"/>
+            <!--Reset button, when clicked it resets the forms values-->
+            <input type="reset" id="resetButton" value="Reset Button"/>
+        </form>
+
+        <!-- New heading for degree Calculation -->
+        <h2> Fahrenheit To Kelvin Conversion </h2>
+        <h3>
+            <!--JavaScript that converts Farenheit to Kelvin-->
+            <script type="text/javascript">
+                //Fahrenheit variable is the input from the prompt, deafult value is 0
+                //Convert Fahrenheit by parsing input to a Float
+                var fahrenheit = parseFloat(prompt("Please enter a Temperature in Fahrneheit to convert to Kelvin:", "0"));
+                /* Displays Temp. entered in Fahrenheit
+                 * Then displays the temp in Kelvin, 
+                 * By doing the conversion formula
+                 */   
+                document.write("You entered: " + fahrenheit + "\u00B0 F</br>");
+                document.write("Temperature in Kelvin, rounded to nearest whole number: " 
+                                + Math.round((fahrenheit + 459.67) * (5/9)) + "\u00B0 C"); //\u00b0 is unicode for degree sign
+            </script>
+        </h3>
+
+        <!--New heading for Prism Calculation-->
+        <h2> Trapezoidal Prism Volume Calculation </h2>
+        <h3>
+            <!-- JavaScript that prompts the user with measurements of a Trapezoidal Prism
+                Displays the values, calulates the Volume of the prism with the values
+                Then reduces all values by a Quarter, redisplays the values and recalculates the Volume
+            -->
+            <script type="text/javascript">
+                //The length value to calculate the volume, from user input in prompt
+                var length = parseFloat(prompt("Enter the Length Value:", 0));
+                    //Display Length
+                    document.write("Trapezoidal Prism Length: " + length + "</br>");
+                //Height value of prism from user input
+                var height = parseFloat(prompt("Enter the Height Value:", 0));
+                    //Display Height
+                    document.write("Trapezoidal Prism Height: " + height + "</br>");
+                //The Base width/B1 value of prism, form user input
+                var baseWidth = parseFloat(prompt("Enter the Base Width Value:", 0));
+                    //Display Base Width
+                    document.write("Trapezoidal Prism Base Width: " + baseWidth + "</br>");
+                //Top width/B2 value of the prism from user input
+                var topWidth = parseFloat(prompt("Enter the Top Width Value:", 0));
+                    //Display Top Width
+                    document.write("Trapezoidal Prism Top Width: " + topWidth + "</br>");
+                //Volume variable calculates the volum of the prism based off of the user input
+                var volume = length * height * ((baseWidth+topWidth)/2);
+                    //Display Volume
+                    document.write("Volume of Prism: " + volume + "</br>");
+
+                //Separates the Original Values from the Reduced ones.
+                document.write("<h2> Quarter Reduced Trapezoidal Prism Volume </h2>");
+
+                /* I am making new variables so that the original Values 
+                 * could be used along with the reduced
+                 */
+
+                //Reduce length by a quarter and then display it on website
+                var newLength = length * 0.75;
+                document.write("Reduced Trapezoidal Prism Length: " + newLength + "</br>");
+
+                //Reduce Height by a quarter and then display it on website
+                var newHeight = height * 0.75;
+                document.write("Reduced Trapezoidal Prism Height: " + newHeight + "</br>");
+
+                //Reduce Base Width by a quarter and then display it on website
+                var newBaseWidth = baseWidth * 0.75;
+                document.write("Reduced Trapezoidal Prism Base Width: " + newBaseWidth + "</br>");
+
+                //Reduce Top Width by a quarter and then display it on website
+                var newTopWidth = topWidth * 0.75;
+                document.write("Reduced Trapezoidal Prism Top Width: " + newTopWidth + "</br>");
+
+                //Recalculate the Volume with the newly quartered values and display value on website
+                var newVolume = newLength * newHeight * ((newBaseWidth+newTopWidth)/2);
+                document.write("Reduced Volume of Prism: " + newVolume + "</br>");
+
+            </script>
+        </h3>
+    </body>
+</html>

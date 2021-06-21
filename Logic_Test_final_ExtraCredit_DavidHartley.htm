@@ -1,0 +1,343 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+    I did the thrid level extra credit
+    There is not much that I changed for the extra credit, the only changes were
+    in the startGame(), startNextLevel(), creatRooms() methods and I created a new method, clacNextDoorVariable()
+
+    I accidentally did the randomly choose rooms extra credit in the original file
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Extra Credit Final CSD 111</title>
+        <!--Style tag more or less centers the UI for the game-->
+        <style>
+            body {
+              max-width: 500px;
+              margin: auto;
+              padding: 10px;
+            }
+        </style>
+            <script type="text/javascript">
+                //Array of Room objects 
+                var rooms = new Array();
+                var levelsAvailable;//keeps track of the levels available to play
+                var room1;//first room object to choose
+                var room2;//second room object to choose from
+                //var room3;//the third room?
+
+                //Function starts the games logic
+                function startGame(){
+                    createRooms();//Always call first so all room objects are created
+                    levelsAvailable = (rooms.length / 3).toFixed(0);//round the number to be an even 3 turns
+                    rooms = shuffleArray(rooms); //Shuffle array index values
+                    updateAssets(0,1);//update page to show names and set values
+                }
+
+                /* Function will start the next level after the user won
+                 * Decreases levels available and will check if the game is over
+                 * If over prompt user to play again, if not do the next level
+                 * @param doorSelected: The door selected by the user, either 1 or 2
+                 *                      decides the next levels doors
+                 */ 
+                function startNextLevel(doorSelected){
+                    var nextDoorVariable; //will be array of int's that help dynamic calc. for next room pair
+                    levelsAvailable--;// One less level available
+                    //if the game is over
+                    if(levelsAvailable == 0){
+                         playAgain("Congrats! You Won! Play Again?"); //prompt user to play again
+                         return;//exit code
+                    }
+                    //update game with next levels choices
+                    if(doorSelected == 1){//chose left door
+                        nextDoorVariable = calcNextDoorVariable(levelsAvailable, 1)
+                        updateAssets(levelsAvailable + nextDoorVariable[0], levelsAvailable + nextDoorVariable[1]);
+                    }
+                    if(doorSelected == 2){//chose right door
+                        nextDoorVariable = calcNextDoorVariable(levelsAvailable,2);
+                        updateAssets(levelsAvailable + nextDoorVariable[0], levelsAvailable + nextDoorVariable[1]);
+                    }
+                }
+
+                /* Function gets the vairable to calculate the variable needed
+                 * for updating the assets correctly to go onto the next level
+                 * Kind of hard coded variables, but I wasn't able to find a variable for a equation that met all parameters
+                 * @param levelsAvailable: The number levels that are available
+                 * @param doorChoice: The door that the user chose, 1= left, 2 = right
+                 * @param return: Array of int's that go into an equation for starting the next level
+                 *               [0] = Smaller index room, [1] = larger index of room in 'rooms' array
+                 */
+                function calcNextDoorVariable(levelsAvailable, doorChoice){
+                    if(levelsAvailable == 2 && doorChoice == 1) return [0,1];
+                    if(levelsAvailable == 2 && doorChoice == 2) return [2,3];
+                    if(levelsAvailable == 1 && doorChoice == 1) return [5,6];
+                    if(levelsAvailable == 1 && doorChoice == 2) return [7,8];
+                }
+
+                /* Function restarts the game if the user wants to play again
+                 * Resets the rooms array, because if not the array will get duplicate rooms
+                 */
+                function playAgain(message){
+                    //prompts user to play again
+                    if(confirm(message)){
+                        //reset the array to be empty
+                        rooms = new Array(); 
+                        //start the game again
+                        startGame();
+                    }else{//removes ability to not play again and just reselect the correct option
+                        document.write("<h2>Quit Game </br> Please Refresh to play again</h2>");
+                    }
+                }
+
+                /* Updates the names for the object buttons to choose from
+                 * as well as changes the values of the door
+                 * @param objectOne: The first rooms object index
+                 * @param objectTwo: The second rooms object index
+                 */ 
+                function updateAssets(objectOne, objectTwo){
+                    assignRooms(objectOne,objectTwo); //Starting two rooms
+                    //change labels
+                    setDoorValues();// Set the values for the door
+                    changeLabel('object-1', room1.object); // + " " + room1.doorValue);// lets you cheat and see
+                    changeLabel('object-2',room2.object); // + " " + room2.doorValue);// which object goes with which door, 1=left, 2=right
+                }
+
+                // This function changes the label text for the passed  HTML element ID. 
+                // Function given by Bruce McLean
+                function changeLabel(eID, text) { 
+                    //get element
+                    var element = document.getElementById("label-"+eID);
+                    //if element exists
+                    if (element != null){
+                        element.innerHTML = text; //update text
+                    }else{
+                        alert(eID + " Not Found");//throw error alert
+                    }
+                } 
+
+                /* Function will create all options for room possibilities
+                 * Option for create more rooms for more levels!
+                 */
+                 function createRooms(){
+                    //Create all rooms 
+                    createRoomObject("Elephant", "Penguin", "Edward the elephant is fascinated by the penguin");
+                    createRoomObject("Collapsing Walls", "Steel Pry Bar", "The Bar holds the walls apart");
+                    createRoomObject("Poison", "Gas Mask", "The Gas Mask filters out the poison gas");
+                    createRoomObject("Robot Ninja", "Remote Control", "Pressing random buttons turns off the robot");
+                    createRoomObject("Tiger", "Chair", "Elsa is a retired circus tiger and she backs down from the chair");
+                    createRoomObject("Pitch Black", "Flashlight", "The Flashlight illuminates the way");
+                    //Newly added Rooms
+                    createRoomObject("Maniac", "Tranquilizer", "The maniac calms down, he's actually a nice guy");
+                    createRoomObject("Water", "Floaties", "The Floaties help you swim across the room");
+                    createRoomObject("Shark Pit", "Grappling Hook", "The Grappling hook lets you fly across the shark pit");
+                    createRoomObject("NFL", "Super Shoes","The Super Shoes allows you to juke out the entirety of the NFL");
+                }
+
+                /* Function creates an empty object and will store data in the object
+                 * The objects stores the room name, object for the room, and the reasoning 
+                 * and will store object in global array
+                 * @param String roomName: The name of the Room object
+                 * @param String correctObject: The correct object for the room
+                 * @param String reason: The reasoning for the correct object
+                 * - I could not get using a seperate class object to store data to work, so this is the closest thing to that
+                 */
+                function createRoomObject(roomName, object, reason){
+                    let roomObject = new Object();//create new object
+                    roomObject.roomName = roomName;//Assign all the values needed
+                    roomObject.object = object;
+                    roomObject.reason = reason;
+                    roomObject.doorValue = 0;
+                    rooms.push(roomObject);//add to array
+                }  
+
+                /* Assings the global room values a room object - Works for pair of rooms
+                 * @param room1Index: The index in the rooms array that will be one of the two choices 
+                 * @param room2Index: The index in the rooms array that will be one of the two choices 
+                 */
+                 function assignRooms(room1Index, room2Index){
+                    room1 = rooms[room1Index];
+                    room2 = rooms[room2Index];
+                }
+
+                /* Shuffles the array so it will be random
+                 * @param array: the array to be shuffled
+                 * @return: The shuffled array
+                 */
+                 function shuffleArray(array){
+                    //Two random numbers that will be indexes to swap in the array
+                    var randomNum1 = 0;
+                    var randomNum2 = 0;
+                    //For the length of the array
+                    for(var rotation = 0; rotation < array.length; rotation++){
+                        do{//get two random numbers
+                            randomNum1 = Math.floor(Math.random() * array.length);
+                            randomNum2 = Math.floor(Math.random() * array.length);
+                        }while (randomNum1 == randomNum2);//while they aren't equal to each other
+                        //Swap the two indexes
+                        swap(array, randomNum1, randomNum2);
+                    }
+                    return array;
+                }
+
+                /* Swaps two array index values
+                 * Simple swap algorithm 
+                 *@param array: The array of room objects
+                 *@param index1: The first index to be swapped
+                 *@param index2: The second index to be swapped
+                 *@return: Swapped array
+                 */
+                function swap(array, index1, index2){
+                    //swaps two indexes
+                    var temp = array[index1];
+                    array[index1] = array[index2];
+                    array[index2] = temp;
+                    return array;
+                }
+                
+                /* This function will set the object to be tied to a room
+                 * Randomly chooses which room will be connected to a door
+                 * Only will work for two doors/objects        
+                 */
+                function setDoorValues(){
+                    //50-50 chance for the first object to be left door and visa versa
+                    if(Math.floor(Math.random() * 2) == 0){
+                        room1.doorValue = 1;
+                        room2.doorValue = 2;
+                    }else{
+                        room1.doorValue = 2;
+                        room2.doorValue = 1;
+                    }
+                }
+
+                /* Function will be called when the user clicks 
+                 * Gets the selected buttons and will find if they are correct
+                */
+                function enterChoices(){
+                    //Get the choices from user
+                    var choiceSelected = get_buttons();//[0] = object, [1] = door
+                    //check input to see win or loss
+                    testLuck(choiceSelected);
+                }
+
+                // This function checks to see what radio buttons the user selected. 
+                // @return array of buttons pressed
+                function get_buttons(){
+                    var returnButtons = new Array();
+                    returnButtons.push(getSelectedButton('input[name="object"]', true));//get object button
+                    returnButtons.push(getSelectedButton('input[name="door"]', false));//get door button
+                    return returnButtons; //return buttons
+                }
+
+                /* This function gets the buttons that were selected from the options
+                 * @param id: The ID of the radio buttons to choose from
+                 * @param chooseObject: True/false choosing if you want the object or door returned
+                 * @return: The room object that was selected if 'chooseObject' is true
+                 *          The door selected if 'chooseObject' is false
+                 */
+                function getSelectedButton(id, chooseObject){
+                    //gets all radio buttons on page, from Mr. McLeans code
+                    const radioButtonSelectedObject = document.querySelectorAll(id);       
+                    for (const rb of radioButtonSelectedObject) { //for all buttons - from Mcleans code
+                        if (rb.checked) {//if the button is checked
+                            //bool value for if the first button is selected
+                            var selectedFirstButton = rb.value.charAt(rb.value.length - 1) == 1;
+                            //if choosing an object rather than a door
+                            if(chooseObject){
+                                //return the selected objects room details
+                                return selectedFirstButton ? room1 : room2;
+                            } 
+                            return rb.value; //return doors value
+                        }
+                    }
+                }
+                
+                /* Function will check if the door and object selected will result in a win
+                 * If won, next level, if lost, tell user reasoning and promt to play again
+                 * @param array: Array of the two choices selected by the user
+                 *              [0] = object selected, [1] = door selected, 1 is left - 2 is right door
+                 */
+                function testLuck(array){
+                    //if correct choice - the doors value equals the room selected
+                    if(array[0].doorValue == array[1]){
+                        alert("Congradulations!\n" + array[0].reason);//Display Reason
+                        startNextLevel(array[1]);//Next level
+                    }else {
+                        //The selected object does not protect you from the room
+                        alert("You lost. " + displayLossMessage(array[0]));
+                        //prompt to play again
+                        playAgain("Play Again?");
+                    }
+                }
+
+                /* Function will return the reasoning for losing
+                 * Finds the object selected and the room selected to result in a loss
+                 * @param room: The room object choosen to find the opposite rooms name
+                 * @return: A string with the format of:
+                 *          "The (object picked) will not save you from the (loosing room selected)"
+                 */
+                function displayLossMessage(room){
+                    var roomChosen;//The rooms name selected
+                    //if the room selected's door val. is the same as the first rooms door val.
+                    if(room.doorValue == room1.doorValue){
+                        //The room that was chosen was the second room
+                        roomChosen = room2.roomName;
+                    }else{
+                        //The room chosen was the first room
+                        roomChosen = room1.roomName;
+                    }
+                    return "The " + room.object + " will not save you from the " + roomChosen;
+                }
+            </script>
+        </head>
+
+    <body>
+        <h2>Welcome to a game of Luck!</h2>
+            <!--Object buttons-->
+            <div class="select-sim" id="select-object">      
+                <div class="title">
+                    <h4> Please Select an Object </h4>
+                </div>
+                <div class="option">
+                    <input type="radio" name="object" value="object1" id="object-1" />
+                    <label id="label-object-1" for="object-1">
+                        <script> document.write(room1.object + " " + room1.doorValue) </script>
+                    </label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="object" value="object2" id="object-2" />
+                    <label id="label-object-2"  for="object-2">
+                        <script> document.write(room2.object + " " + room2.doorValue)</script>
+                    </label>
+                </div>
+            </div>  
+
+            <br>
+
+            <!--Door buttons-->
+            <div class="select-sim" id="select-door">     
+                <div class="title">
+                    <h4> Please Select a door </h4>
+                </div>
+                <div class="option">
+                    <input type="radio" name="door" value="1" id="door-1" />
+                    <label id="label-door-1"  for="door-1">Left Door</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="door" value="2" id="door-2" />
+                    <label id="label-door-2"  for="door-2">Right Door</script>
+                    </label>
+                </div>
+            </div>    
+
+            <br>
+            <!--Submit button and result box-->
+            <div class="submission-button" id="submit-choice">
+                <input type = "button" onclick="enterChoices()" value = "Brace Yourself!"/>
+                <br>
+            </div>
+            <!--Load the game after the rest of the page has loaded-->
+            <script>startGame();</script>
+    </body>
+</html> 

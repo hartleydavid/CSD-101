@@ -1,0 +1,71 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #4 - Ship Charges</title>
+        
+        <script type="text/javascript">
+            /* Function that gets the users input for the weight of package
+             * finds the shipping rate and uses both numbers to find the
+             * shipping charge
+             * display information (weight and cost)
+             */
+            function shippingCharge(){
+                //get input from form
+            weightString = document.getElementById("weight").value;
+            //The weight of the package as a float
+            var weight = parseFloat(weightString);
+            //The cost of the package after finding the rate, rounded to include cents
+            var cost = (weight * findRate(weight)).toFixed(2);
+            //Display Shiping cost
+            window.alert("A package that weighs " + weight 
+                            +"lbs. will cost $" + cost + " to ship");
+            }
+
+            /*This function finds the rate per pound of the package the user is
+             *trying to find the shipping charge for
+             *@param weight: the weight of the packag(lbs) 
+             *@return: the shipping rate for the package
+             * The zero of the exit case makes it so the Shipping charge will always
+             * equal 0, no matter what number based input 0 and under 
+             */
+            function findRate(weight){
+                //exit case if invalid (negative or zero) weight is entered
+                if(weight <= 0 ) return 0; 
+                //2 pounds or less
+                if(weight < 2){
+                    return 1.10;
+                //over 2 pounds but not more than 6 lbs
+                } else if(weight> 2 && weight <= 6){
+                    return 2.20;
+                //Over 6lbs but not more than 10lbs
+                }else if(weight > 6 && weight <= 10){
+                    return 3.70;
+                //Over 10lbs
+                }else{
+                    return 3.80;
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+
+    <h1>Shipping Charge per Pound</h1>
+    <!--Small form for user input-->
+    <form id = "shippingRateForm">
+      Weight of package: <input type = "text" id = "weight" name = "weight" size = "5" /> lbs.
+      
+      <br> <br>
+      <!--onClick() added to the calculate button-->
+      <input type = "button" onclick="shippingCharge()" value = "Calculate Shipping Charge"/>
+      <input type = "reset" value = "Clear" />
+      <br> <br>
+    </form>
+
+    </body>
+</html> 

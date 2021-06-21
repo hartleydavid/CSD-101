@@ -1,0 +1,101 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #4 - Roman Numerals</title>
+        <script type="text/javascript">
+            /*Function that checks if the input from teh user is valid
+             * If not, tells the user invalid number and prompts them to reenter a number
+             * @param inputNum: The number that the user entered to be checked
+             * @return inputNum: the value of a vaild input
+             *
+             * -Recursion like approach to make it so you have to enter a valid number
+             * Not the most idealistic approach but it works on a small scale 
+             * like this program
+             */
+            function checkNum(inputNum){
+                //If the number is between 1 and 10
+                if (inputNum < 1 || inputNum > 10){  
+                    window.alert("Invalid number\nPlease enter a valid number");
+                    numString = prompt("Please enter a number between 1 and 10","1");
+                    //Enter new stack -- Ask for input
+                    inputNum = checkNum(parseInt(numString));
+                }
+                //return valid number
+                return inputNum;
+            }
+
+            /* Function allows code resusability for the roman numeral
+             * Instead of doc.write() being called 10 times, this method
+             * is called 10 times doing a .write() task
+             * @param rn: The Roman Numeral Value based from the user input and
+             *            switch case
+             */
+            function writeRomanNumeral(rn){
+                //Display Roman Numeral
+                document.write(rn);
+            }
+
+            /* Function performs a switch statement that converts the number input
+             * to the corresponding roman numeral (Range 1-10)
+             * @param num: The number input used for the switch statement
+             */
+            function switchToRomanNumeral(num){
+                //Switch statement to display corresponding roman numeral
+                switch(num){
+                    case 1: //If input is number 1
+                        writeRomanNumeral("I");
+                        break;
+                    case 2: //If input is number 2
+                        writeRomanNumeral("II");
+                        break;
+                    case 3: //If input is number 3
+                        writeRomanNumeral("III");                                        
+                        break;
+                    case 4: //If input is number 4
+                        writeRomanNumeral("IV");               
+                        break;
+                    case 5: //If input is number 5
+                        writeRomanNumeral("V");
+                        break;
+                    case 6: //If input is number 6
+                        writeRomanNumeral("VI");
+                        break;
+                    case 7: //If input is number 7
+                        writeRomanNumeral("VII");
+                        break;
+                    case 8: //If input is number 8
+                        writeRomanNumeral("VIII");
+                        break;
+                    case 9: //If input is number 9
+                        writeRomanNumeral("IX");
+                        break;
+                    case 10: //If input is number 10
+                        writeRomanNumeral("X");           
+                        break;
+                    }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>
+            <script type="text/javascript">
+            //String input from the user
+            var numString = prompt("Please enter a number between 1 and 10","1");
+            //Check the number to make sure it's within the range
+            var num = checkNum(parseInt(numString));
+            document.write(" The number " + num + " in Roman Numerals is: " );
+            //Get the corresponding roman numeral
+            switchToRomanNumeral(num);
+            </script>
+        </h2>
+    </body>
+</html> 
+
+
+
+

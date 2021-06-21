@@ -1,0 +1,60 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #7 - Lottery Number Generator</title>
+
+            <script type="text/javascript">
+                var lotteryNumbers = new Array(7);//7-digit lottery num length
+               
+                /* Function will Fill the array and then display the array
+                 * Instead of calling both methods, just call one that will call both
+                 */
+                function lotteryTicketGenerator(){
+                    fillLotteryTicket();
+                    displayLotteryTicket();
+                }
+
+                /* Will fill the 7-length array with random numbers 
+                 * Loops through each element and will enter a random value between 0 - 9
+                 */
+                function fillLotteryTicket(){ 
+                    for(index = 0; index < lotteryNumbers.length; index++){
+                        lotteryNumbers[index] = Math.floor(Math.random() * 10);
+                    }
+                }
+
+                /* Displays the lottery ticket 
+                 * Fence post problem with formatting the output
+                 * Solved with having the loop do all but last element, 
+                 * then writes that one outside of loop
+                 */
+                function displayLotteryTicket(){
+                    document.write("Your 7-digit lottery ticket will be: ");
+                    //for every value but the last
+                    for(index = 0; index < lotteryNumbers.length - 1; index++){
+                        //display value and "-"
+                        document.write(lotteryNumbers[index] + " - ");
+                    }
+                    //Fence post problem
+                    //Will write last number outside of loop so th "-" isn't connected
+                    // .length - 1 is the last index, better than just writing 6
+                    document.write(lotteryNumbers[lotteryNumbers.length -1]);
+                }
+            </script>
+
+        </head>
+    <body>
+        <h2>Lottery Number Generator</h2>
+        <!-- Generate and Display the lottery numbers -->
+        <script type="text/javascript">lotteryTicketGenerator();</script>
+    </body>
+</html> 
+
+
+
+

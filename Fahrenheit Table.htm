@@ -1,0 +1,56 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #5 Part Two - Centigrade to Fahrenheit Dynamic Table</title>
+            <script type="text/javascript">
+                /* Function converts Celsius to Farenthiet
+                 * @param celsius: Value in C.
+                 * @return: Converted F. value
+                 */
+                function celsiusToFahrenheit(celsius){
+                    /* Rounding error for 13C for some reason
+                     * Calculations will always be to one decimal point either way
+                     * Fixing the F. value to one point will prevent any
+                     * rounding number errors that may occur with Javascript*/
+                    return ((9/5)*celsius + 32).toFixed(1);
+                }
+
+                /* Function displays the Centigrade/fahrenheit table
+                 * Uses a for-loop to claculate both values 
+                 */
+                function fillTable(){
+                    //For temeratures 0 to 20
+                    for (centigrade=0; centigrade <= 20; centigrade++){
+                        document.write("<tr>"); //New row
+                        //New column with C temp.
+                        document.write("<td>"+centigrade+"</td>");
+                        //New column with F temp.
+                        document.write("<td>"+celsiusToFahrenheit(centigrade)+"</td>");
+                        document.write("</tr>");//Close row tag
+                    }
+                }
+            </script>
+        </head>
+    <body>
+        <h2>Centigrade to Fahrenheit Dynamic Table</h2>
+        <!--Dynamic Table-->
+        <table width="225" border="1">
+                <tr>
+                    <!--Table Headers-->
+                    <th>Centigrade</th>
+                    <th>Fahrenheit</th>
+                </tr>
+                <!--Call method to fill the table-->
+                <script type ="text/javascript">fillTable();</script>
+        </table>
+     </body>
+</html> 
+
+
+
+

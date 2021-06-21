@@ -1,0 +1,55 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #6 - Odd/Even Counter</title>
+
+            <script type="text/javascript">
+
+
+            /* The functions counts how many odd/even numbers are
+             * in a batch of 100 random ints in the range of 1-100
+             * Displays the counter after counting each number
+             */
+            function oddEvenCounter(){
+                //Counter variables for odd/even numbers
+                var even = 0;
+                var odd = 0;
+                //For 100 loops
+                for(var counter = 0; counter < 100; counter++){
+                    //Check if a random number between 1 and 100 is even
+                    //Even or odd, increment the respective counter
+                    isEven(Math.floor((Math.random()*100) + 1)) ? even++ : odd++;
+                }
+                //Display counters
+                document.write("Even Number Count: " + even + "</br>");
+                document.write("Odd Number Count: " + odd) + "</br>";
+            }
+
+            /* Function that checks if a number input is even or not
+             * @param num: Teh number input to check if even
+             * @return: True if the number is even
+             *          False if the number is odd
+             */
+            function isEven(num){
+                return num % 2 == 0;
+            }
+            </script>
+
+        </head>
+    <body>
+        <!--Title and Subtitle for program-->
+        <h2>Odd / Even Counter</h2>
+        <h4> Out of 100 Random Numbers</h4>
+        <script type="text/javascript"> oddEvenCounter();</script>
+    </body>
+</html> 
+
+
+
+

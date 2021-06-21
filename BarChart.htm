@@ -1,0 +1,121 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #5 Part One - Bar Chart</title>
+            <script type="text/javascript">
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return: Return INVALID if it's an invalid input, 
+                 *          Return the value if the number is valid      
+                 */
+                function checkNum(inputNum){
+                    //If number is negative or no number is inputed
+                    if(inputNum < 0 || isNaN(inputNum)){
+                        window.alert("INVALID INPUT \n PLEASE REFRESH PAGE");
+                        return "INVALID";
+                    }
+                    //return number anyways
+                    return inputNum;
+                }
+                /* Function checks if the Symbol is valid
+                 * Gets rid of any White space in the string input
+                 * And if the length is over one symbol, use the first character in the string
+                 * Or if the string is empty (no characters) default to the *
+                 * @return: Valid Symbol
+                 */
+                function checkSymbol(symbol){
+                    //Gets rid of any whitespace in the string
+                    symbol = symbol.replace(" ", "");
+                    //If there is more than one Symbol
+                    if(symbol.length > 1){
+                        //Use the first character
+                        return symbol.charAt(0);
+                        //if the input is empty ("")
+                    }else if(symbol.length < 1 ){
+                        //Deafult no input to the *
+                        return "*";
+                    }
+                    //return user input
+                    return symbol;
+                }
+
+                /* Part One of the bar Chart:
+                 * Display the number of *s from user input
+                 *
+                 * @param input: The number input for the number of *s to output
+                 * @return: The string with the number of *s
+                 */
+                function displayBarChart(input){
+                    //Check if number is valid
+                    input = checkNum(input);
+                    //Starting output for the bar chart
+                    var output = input + " ==> ";
+                    //For the number of "bars" to output
+                    for(var count = 0; count < input ; count++){
+                        output += "*";
+                    }
+                    //return the barchart
+                    return output;
+                }
+
+                /* Part two of the Bar Chart:
+                 * Displays the symbols the number of times from user input
+                 *
+                 * @param num: The number of Symbols to print
+                 * @param symbol: The symbol to print
+                 * @return: The string with the number and the number of symbols from user output
+                 */
+                function barChart(num, symbol){
+                    //Check if num is non negative
+                    num = checkNum(num);
+                    //Check symbol if it contains only one symbol
+                    symbol = checkSymbol(symbol);
+                    //starting output format
+                    var output = num + "==>";
+                    //Loop for the number of times from user input
+                    for(var count = 0; count < num; count++){
+                        //add symbols to output
+                        output += symbol;
+                    }
+                    //return string of barchart
+                    return output;
+                }
+            </script>
+        </head>
+    <body>
+
+        <h2>Bar Chart - Part 1</h2>
+
+        <script type="text/javascript">
+            var numOutput = parseFloat(prompt("Please Enter a number", "0"));
+            //Check if number is valid
+            checkNum(numOutput);
+            //Display bar chart
+            document.write(displayBarChart(numOutput));
+
+        </script>
+
+        <h2>Bar Chart - Part 2 </h2>
+        <script type="text/javascript">
+            //Prompt the user to enter a number
+            var numInput = parseFloat(prompt("Please Enter a number", "0"));
+            //Prompt the user to enter a symbol
+            var symbolInput = prompt("Please Enter a Symbol", "*");
+            //Check if number is valid
+            checkNum(numInput);
+            //Display bar chart
+            document.write(barChart(numInput, symbolInput));
+        </script>
+
+    </body>
+</html> 
+
+
+
+

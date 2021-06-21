@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <title>Assignment Number 3</title>
+
+        <script type="text/javascript">
+            /*Method that converts Fahrenheit to Reamur
+             * @param fahrenheit: float point that represents the users input of
+             *fahrenheit to be converted to reaumur
+             */
+            function FR_converter(fahrenheit){
+                //Reaumur calculation
+                var rt = Math.round((fahrenheit - 32) * (4/9));
+                //Display in Reaumur
+                document.write("<h3> Your tempurature in R\xE9aumur is: " + rt + "\u00B0R\xE9</h3>");
+            }
+
+            /* Function that calculates a Cone's Volume
+             * @param height: Float number to represent the height of the cone
+             * @param radius: Float number representing the Radius of the cone
+             * @return: returns the volume of the Cone rounded two decimal places
+             */
+            function coneVolume(height, radius){
+                //Volume calculation
+                var volume = (Math.PI) * (Math.pow(radius,2)) * (height/3);
+                //Round vol. to two decimal points
+                return volume.toFixed(2);
+            }
+        
+        </script>
+    </head>
+
+    <body>
+        <h2> Fahrenheit to Reaumur Conversion </h2>
+            <script type="text/javascript">
+                //fTemp is the Users fahrenheit temperature input from the promt. Display input
+                var fTemp = parseFloat(prompt("Enter a tempurature in \u00B0F to convert to R\xE9aumur:"));
+                document.write("<h3>You entered: " + fTemp + "\u00B0F </h3>");
+                //Convert F to Reaumur
+                FR_converter(fTemp);
+            </script>
+
+
+        <h2> Cone Volume</h2>
+        <script type="text/javascript">
+            //Variable represents the Cone's Height value from user input and displays it
+            var coneHeight = parseFloat(prompt("Enter a HEIGHT value of the Cone: "));
+            document.write("You entered a Height value of: " + coneHeight + "</br>");
+            //Variable represents the Cone's Radius value from user input and displays it
+            var coneRadius = parseFloat(prompt("Enter a RADIUS value of the Cone: "));
+            document.write("You entered a Radius value of: " + coneRadius + "</br>");
+            //Display Volume of Cone. Call coneVolume method which returns vol.
+            document.write("<h4>The Volume with the Values you entered is: " 
+                            + coneVolume(coneHeight, coneRadius) + "</h4></br>");
+        </script>
+    </body>
+</html>

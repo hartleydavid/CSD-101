@@ -1,0 +1,79 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #7 - Array Analysis Generator </title>
+            <script type="text/javascript">
+                /* The functions creates an array of a given size
+                 * and fills each element with a random number in the range of
+                 * 1 to 10
+                 * @param size: The size to make the array
+                 * @return randomArray: The filled array
+                 */
+                function createRandomArray(size){
+                    //Array of length 10 filled with random numbers
+                    var randomArray = new Array(size);
+                    //for the length of the array
+                    for(index = 0; index < randomArray.length; index++){
+                        randomArray[index] = Math.floor(Math.random() * 10 + 1);
+                    }
+                    return randomArray; //Return array
+                }
+
+                /* Function will count the number of occurences in a array
+                 * Loops through array and checks each index
+                 * @param array: The array to step through
+                 * @param num: The number that we check the occurences of
+                 * @return count: The number of occurences in the array
+                 */
+                function countOccurences(array, num){
+                    var count = 0;
+                    //for array length
+                    for(index = 0; index < array.length; index++){
+                        //if the num is equal to the value, increment count
+                        if(num == array[index]) count ++;
+                    }
+                    return count;//return count
+                }
+
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return:  10 if it's an invalid input, 
+                 *           The value if the number is valid      
+                 */
+                 function checkNum(num){
+                    //if not a num
+                    if(isNaN(num)){
+                        //Alert User
+                        window.alert("INVALID NUMBER\nInput will now be 10");
+                        return 10;//return 10 for no input
+                    }
+                    return num;//return num from input
+                }
+            </script>
+
+        </head>
+    <body>
+        <h2>Array Analysis</h2>
+        <script type="text/javascript"> 
+            //Prompt user
+            var input = parseFloat(prompt("Enter a size of array: ", "10"));
+            //Creat random array
+            var array = createRandomArray(checkNum(input));
+            //Get random number for occurances
+            var number = Math.floor(Math.random() * 10 + 1);
+            //Display info
+            document.write("The randomly generated Array is: [" + array.toString() + "]</br>")
+            document.write("Number of Occurences of " + number + ": " + countOccurences(array, number)); 
+        </script>
+    </body>
+</html> 
+
+
+
+

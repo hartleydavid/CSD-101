@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8" >
+		<title>BMI Calculator</title>
+    <!-- David Hartley -->
+
+    <script type="text/javascript">
+      /* Function that takes the input of the feet, inches, and weight form boxes
+       * uses that input to calculate the BMI and displays the BMI value
+       */
+      function BMI_form(){
+        //value of input in feet box
+        var feet = parseFloat(document.getElementById("feet").value);
+        //value of input in inches box
+        var inches = parseFloat(document.getElementById("inches").value);
+        // Var height represents the height in inches from the input by the user
+        var height = (feet * 12) + inches;
+        //Weight in pounds from user input
+        var weight = document.getElementById("weight").value;
+        //Caluclated BMI from user input
+        var bmi = weight * (703 / (Math.pow(height,2)));
+        document.getElementById("bmi").value = bmi.toFixed(1);//display BMI, rounded to 1 decimal
+      }
+
+    </script>
+
+	</head>
+	<body>
+    <!--Form code from Bruce McLean-->
+    <h1>BMI Calculator</h1>
+    <form id = "form01">
+      <strong>Height:</strong> <input type = "text" id = "feet" name = "feet" size="2" /> feet  
+        <input type = "text" id = "inches" name = "inches" size = "2" /> inches
+      <br> <br>
+      <strong>Weight: </strong><input type = "text" id = "weight" name = "weight" size="3" /> pounds
+      <br> <br>
+      <!--onClick() added to the calculate button-->
+      <input type = "button" onclick="BMI_form()" value = "Calculate BMI"/>
+      <input type = "reset" value = "Clear" />
+      <br> <br>
+      BMI: <input id="bmi" name="bmi" type="text" size="10" readonly>
+
+    </form>
+
+    <h3>BMI Categories:</h3> 
+    <ul>
+    <li>Underweight = &lt;18.5</li>
+    <li>Normal weight = 18.5–24.9</li> 
+    <li>Overweight = 25–29.9</li> 
+    <li>Obesity = BMI of 30 or greater</li> 
+    </ul>
+    
+    </body>
+			
+		
+</html>

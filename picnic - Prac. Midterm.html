@@ -1,0 +1,55 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <meta charset="UTF-8" />
+    <title>Hot Dog Cookout</title>
+    <script type="text/javascript">
+        //const of hot dogs per person
+        var AVERAGE_HD_PER_PERSON = 2.25;
+
+        //Calculates all the information for the cookout
+        //returns all info in a array
+        function calculateTotalSupplies(people, paleoPeople){
+            //number of total hotdogs needed
+            //always round up
+            var totalHotDogs = Math.ceil(AVERAGE_HD_PER_PERSON * people);
+            //total number of buns needed
+            var totalBuns = Math.ceil((people - paleoPeople) * AVERAGE_HD_PER_PERSON);
+
+            //the number of packages needed
+            var hotDogPackages = Math.ceil(totalHotDogs / 10);
+            var bunPackages = Math.ceil(totalBuns / 8); // round up         
+
+            //the number of left overs
+            var leftOverHotDogs = hotDogPackages*10 - totalHotDogs;
+            var leftOverBuns = bunPackages*8 - totalBuns;
+            return [totalHotDogs,totalBuns,hotDogPackages,bunPackages,leftOverHotDogs,leftOverBuns];
+        }
+
+        //Displays all the information for the cookout
+        function displayCalculations(values, people, paleoPeople ){
+            document.write("There are " + people + " coming, " + paleoPeople + " opt for paleo style</br>");
+            document.write(values[0] + " total hotdogs and " + values[1] + " total buns are required</br>");
+            document.write(values[2] + " packages of hotdogs and " + values[3] +" packages of buns are required</br>");
+            document.write("Result: " + values[4] + " hotdogs and " + values[5] + " buns will remain");
+        }
+    </script>
+
+</head>
+
+<body>
+    <h2>Hot Dog Cookout</h2>
+    <script type="text/javascript">
+        //Prompts for user
+        var people = parseInt(prompt("How many people are attending the cookout?", ""));
+        var paleoPeople = parseInt(prompt("How many people will be eating paleo-style?",""));
+        var calculations = calculateTotalSupplies(people, paleoPeople);//array of all calculated supplies
+        //Displays info
+        displayCalculations(calculations, people, paleoPeople);
+    </script>
+
+</body>
+</html>

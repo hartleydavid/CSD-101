@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <title> Assignment #4 - Triangle</title>
+        <meta charset="utf-8" >
+
+        <script type="text/javascript">
+            /* Method that is called to calculate the area 
+             * of the two triangles in the form
+             * Gets all the values in the form and send info to another
+             * function to compare the areas with parameters of the two areas
+             */
+            function calculateAreas(){
+                //The base value of the first triangle
+                var baseOne = document.getElementById("b1").value;
+                //The height value of the first triangle
+                var heightOne = document.getElementById("h1").value;
+                //The base value of the second triangle
+                var baseTwo = document.getElementById("b2").value;
+                //The height value of the second triangle
+                var heightTwo = document.getElementById("h2").value;
+                //Compare the areas
+                compareArea(areaOfTriangle(baseOne,heightOne), 
+                            areaOfTriangle(baseTwo,heightTwo));
+
+            }
+            /* Function that caluclates the area of a triangle given its base and height
+             *@param float base: the base value of a triangle
+             *@param float height: the height value of the triangle
+             *@return: the area of the triangle
+             */
+            function areaOfTriangle(base, height){
+                return (parseFloat(base) * parseFloat(height)) / 2 ;
+            }
+            /* This functions compares the areas of two triangles
+             * alerts the user which triangle has the greatest area or if they are equal
+             *@param areaOne: the first triangles area
+             *@param areaTwo: the second area of teh Triangle
+             */
+            function compareArea(areaOne, areaTwo){
+                //If the area is greater then the other triangle
+                if(areaOne > areaTwo){
+                    window.alert("The First Triangle had the greater Area of " + areaOne + " units");
+                //If the area is less then the other triangle
+                }else if(areaOne < areaTwo){
+                    window.alert("The Second Triangle had the greater Area of " + areaTwo + " units");
+                //If niether > or < they area equal
+                }else{
+                    window.alert("The Areas are Equal with " + areaTwo + " units");
+                }
+            }
+        </script>
+    </head>
+
+    <body> 
+        <h3>Areas of Triangles</h3>
+        <!-- Form for input to compare Triangle areas
+            each base and height value has their own box
+        -->
+        <form id="TriangleForm">
+            Base of First Triangle <input type="text" id="b1" name="baseOne" size="10" ></br></br>
+            Height of First Triangle <input type="text" id="h1" name="heightOne" size="10" ></br></br>
+            Base of Second Triangle <input type="text" id="b2" name="baseTwo" size="10" ></br></br>
+            Height of Second Triangle <input type="text" id="h2" name="heightTwo" size="10" ></br></br>
+
+
+			<!--onClick() tag to give function to the calculate button-->
+			<input type = "button" id="button1" onclick="calculateAreas()" value="Calculate and Comapare Areas" >
+			<input type = "reset" value="Clear" >	
+    </body>
+</html>

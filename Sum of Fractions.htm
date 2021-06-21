@@ -1,0 +1,68 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #6 - Sum of Fractions</title>
+
+            <script type="text/javascript">
+
+                /* This function calculates the fractional sum of the input number
+                 * Does this recursively with when the number equals 0, the sum is 
+                 * fully calulated
+                 * -Im not to sure if the code is the reason for why an input over 11427 breaks the program
+                 *  I did a doc.write() to output every number, and it will go 11427 to 0, but with 11428,
+                 *  the recursion will go 11428 to 1. 0 is never passed. Either the stack is too large or something is wrong
+                 *  with my recursion. The larger the number passed 11427, the further from 0 the program will end
+                 * @param n: The number for the starting fraction for the sum
+                 * @return: 0 if the base case is met
+                 *          The fraction of the parameter + one less the parameter fraction
+                 */
+                function fractionSum(n){
+                    //Base Case: If the number equals 0, reverse call stack
+                    //If not 0, add (1/n) and call fractionSum with (n-1)
+                    // -- For outputing every number -- document.write(n + " ");
+                    return n == 0 ? 0 : (1/n) + fractionSum(n-1);
+                }
+
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return:  1 if it's an invalid input, 
+                 *           The value if the number is valid (can be 1)      
+                 */
+                 function checkNum(inputNum){
+                    //If number is negative or no number is inputed
+                    if(isNaN(inputNum) || inputNum < 0){
+                        window.alert("INVALID INPUT, Input is now 1\nPLEASE REFRESH PAGE");
+                        return 1;
+                    }
+                    //If num is zero
+                    if(inputNum == 0){
+                        //Display message, will return the zero 
+                        window.alert("0 is a Invalid denominator\nPlease enter a number greater than 0");
+                    }
+                    //return number anyways
+                    return inputNum;
+                }
+            </script>
+
+        </head>
+    <body>
+        <h2>Sum of Fractions</h2>
+        <script type="text/javascript"> 
+            //Prompt user for intput, parse input and then check input 
+            var input = checkNum( parseInt(prompt("Enter a Integer greater than 0: ", "1")) ); // If number is greater than 11427 code breaks? 
+            //find the fraction sum of input and then display sum
+            document.write("The Sum for the input <strong>" + input +"</strong> is " 
+                            + fractionSum(input));
+        </script>
+    </body>
+</html> 
+
+
+
+

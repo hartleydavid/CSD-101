@@ -1,0 +1,109 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Midterm - Sort Three Names</title>
+
+            <script type="text/javascript">
+
+                /* Function checks if the Symbol is valid
+                 * Gets rid of any White space in the string input
+                 * And if the lenght is over one symbol, use the first character in the string
+                 * Or if the string is empty (no characters) default to the *
+                 * @return: Valid Symbol
+                 */
+                 function checkInput(name){
+                    //Temporarily get rid of all white spaces 
+                    //To find if Only spaces were inputed
+                    var tempName = name.replace(" ", "");
+
+                    if(tempName.length < 1 ){
+                        //Deafult no input to David
+                        return "David";
+                    }
+                    //return user input
+                    return name;
+                }
+            
+                /* This functions will put the three names from user input
+                 * in Alphabetic order and return the correct order of names
+                 * - Not the cleanest code but it works well
+                 * @param string name1: The First name from user input
+                 * @param string name2: The Second name from user input
+                 * @param string name2: The Third name from user input
+                 * @return: The Alphabetically sorted three names
+                 */
+                function sortThreeNames(name1, name2, name3){
+                    //The order the names will be in 
+                    var first, second, third, placementArray; 
+                    //If name1 is first
+                    if(name1 < name2 && name1 < name3){
+                        first = name1;
+                        //if name two is second 
+                        placementArray = isSecondOrThird(name2, name3);
+                        second = placementArray[0];
+                        third = placementArray[1];
+                         //if name2 is first
+                    }else if(name2 < name1 && name2 < name3){
+                        first = name2;
+                        //if name one is second
+                        placementArray = isSecondOrThird(name1, name3);
+                        second = placementArray[0];
+                        third = placementArray[1];
+                    } else{//Name three will be first
+                        first = name3;
+                        //if name1 is second
+                        placementArray = isSecondOrThird(name1, name2);
+                        second = placementArray[0];
+                        third = placementArray[1];
+                    }
+                    //Return names in order
+                    return first + ", "+ second +", "+ third + ".";
+                }
+
+                /* Function finds which string will come first over the other
+                 * In this case which string would come second or third in order
+                 * Provides lower code repetition 
+                 * Turnary statement could get rid of all code repetition?
+                 *@return : Array with which string comes first
+                 *          index 0 comes first
+                 *          index 1 comes second
+                 */
+                function isSecondOrThird(name1, name2){
+                    var second, third;
+                        //if name1 is second
+                        if(name1 < name2){
+                            second = name1;
+                            third = name2;
+                        }else{//name2 is second
+                            second = name2;
+                            third = name1;
+                        }
+                        return [second, third];
+                
+                //return name1 < name2 ? name1 : name2;
+                }
+            </script>
+        </head>
+    <body>
+        <h2>Sort Three Names</h2>
+        <script type="text/javascript"> 
+            //The three names from user input     
+            var name1, name2, name3;
+            //Prompt user and check input if valid
+            name1 = checkInput(prompt("Please enter the First name",""));
+            name2 = checkInput(prompt("Please enter the Second name",""));
+            name3 = checkInput(prompt("Please enter the Third name",""));
+            //Display names in order of how they were enterd
+            document.write("The three names you entered are: " 
+                                + name1 + ", "+ name2 + ", " + name3 + ".</br>"); 
+            //Display names in Alphabetic order
+            document.write("The names in sorted oder are " + sortThreeNames(name1,name2,name3));
+        </script>
+        
+    </body>
+</html> 

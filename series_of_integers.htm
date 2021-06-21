@@ -1,0 +1,92 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #7 - Series of Integers </title>
+            <script type="text/javascript">
+                //Arrays for positive and negative values
+                //No predetermined length, .push() will add values
+                var positiveArray = new Array();
+                var negativeArray = new Array();
+
+                // Function displays the Arrays and their sums
+                function displayInput(){
+                    //Display Negative Values
+                    document.write("You entered the following negative numbers: " 
+                                    + negativeArray.toString() + "</br>");
+                    document.write("The sum of all negative numbers is: " 
+                                    + calculateArray(negativeArray) + "</br>");
+                    //Display Positve Values
+                    document.write("You entered the following positive numbers: " 
+                                    + positiveArray.toString() + "</br>");
+                    document.write("The sum of all positve numbers is: " 
+                                    + calculateArray(positiveArray) + "</br>");
+                }
+
+                /* Calculates the sum in a integer/float array
+                 * Loops through the array and adds each index -- foreach loop?
+                 * @param array: The array to loop through
+                 * @return total: The sum of all indexes in the array
+                 */
+                function calculateArray(array){
+                    var total = 0;
+                    //For the length of the array
+                    for(index = 0; index < array.length; index++){
+                        total += array[index];//Add index to total
+                    }
+                    return total; //return sum
+                }
+
+                /* Function stores a number in their respective array (+/-)
+                 * Returns if the number is 0 because 0 does nothing to sum
+                 * nor is 0 supposed to be in string output
+                 *
+                 */
+                function storeNumber(num){
+                    if(num == 0) return;//Exit case
+                    //If negative add num to -Array, if positive, add to +Array
+                    num < 0 ? negativeArray.push(num) : positiveArray.push(num); 
+                }
+
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return:  0 if it's an invalid input, 
+                 *           The value if the number is valid      
+                 */
+                function checkNum(num){
+                    //if not a num
+                    if(isNaN(num)){
+                        //Alert User
+                        window.alert("INVALID NUMBER\nInput will now be 0");
+                        return 0;//return 0 for no input
+                    }
+                    return num;//return num from input
+                }
+
+            </script>
+
+        </head>
+    <body>
+        <h2> Series of Integers </h2>
+        <script type="text/javascript"> 
+        //Will prompt user once before asking confirmation
+        do{
+            //Prompt User
+            var userInput = parseFloat( prompt("Enter any number:" , "0"));
+            //Store number in respective array
+            storeNumber( checkNum(userInput) );
+        }while(confirm("Enter Another Number?"));
+        //Display array values
+        displayInput();
+        </script>
+    </body>
+</html> 
+
+
+
+

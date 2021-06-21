@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+	<head>
+	  <meta charset="utf-8" >
+		<title>Seconds Calculator</title>
+    <script type="text/javascript">
+      var invalidInput = false;
+
+        /*Function calculate the total number of seconds from the users input
+         * Gets each box's values and checks if they are valid inputs
+         */
+        function calculateSeconds(){
+          var hourSeconds, minuteSeconds, seconds, totalSeconds;
+          //Get value then check if value is valid and convert to seconds
+          hourSeconds = parseFloat(document.getElementById("hrs").value);
+          hourSeconds = checkNum(hourSeconds, "hrs") * 3600;
+          //Get value then check if value is valid and convert to seconds
+          minuteSeconds = parseFloat(document.getElementById("mins").value);
+          minuteSeconds = checkNum(minuteSeconds, "mins") * 60;
+          //Get value then check if value is valid
+          seconds = checkNum(parseFloat(document.getElementById("secs").value), "secs");
+          //add total seconds
+          totalSeconds = hourSeconds + minuteSeconds+ seconds;
+          //display total
+          if(!invalidInput){
+            document.getElementById("answer").value = totalSeconds;
+          }
+        }
+
+        /* Checks if the user input is invalid
+         * 
+         * @param inputNum: The user input
+         * @return: 0 is the value was empty or negative
+         *          The value if the number is valid      
+         */
+        function checkNum(inputNum, inputBoxID){
+          //If no number or not a number
+          if(isNaN(inputNum)){
+            document.getElementById(inputBoxID).value = "";
+            document.getElementById("msg").value = "A value(s) you entered is not a Number";
+            return 0;//return 0
+          }
+          //If negative number, set box to blank, return 0
+          if(inputNum < 0){
+            document.getElementById(inputBoxID).value = "";
+            document.getElementById("msg").value = "A value(s) you entered is Neagtive, Please enter non-negative numbers.";
+            return 0;
+          }
+          //return value if valid
+          return inputNum;
+        }
+
+    </script>
+
+	</head>
+	<body>
+    <h1>Seconds Calculator</h1>
+    <form id = "form01">
+    <strong> &nbsp Hrs &nbsp&nbsp&nbsp Mins &nbsp&nbsp&nbsp Secs &nbsp&nbsp&nbsp </strong> 
+    <!--OnClick for the calculate button-->
+    <input type = "button" onclick="calculateSeconds()" value = "Calculate Seconds"/>
+    <br>
+    <input type = "text" id = "hrs" name = "hrs" size="3" />   
+    <input type = "text" id = "mins" name = "mins"size = "3" /> 
+    <input type = "text" id = "secs" name = "secs"size = "3" /> 
+    &nbsp&nbsp  
+    <input type = "reset" value = "Clear" /><br> <br>
+
+    <br> <br>
+    The total number of seconds is: <input id="answer" name="answer" type="text" size="10" readonly>
+    
+    <br> <br>
+    Message: <input id="msg" name="ms6" type="text" size="80" readonly>
+
+    </form>
+
+    </body>
+		
+</html>

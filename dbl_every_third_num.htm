@@ -1,0 +1,83 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #7 - Double Every Third Number</title>
+            <script type="text/javascript">
+                //The Array used for input
+                //No set length as length is dynamic
+                var originalArray = new Array();
+
+                /* Function stores a number an array 
+                 * @param array: The array to add the number into 
+                 * @param num: The value to add to array
+                 */
+                 function storeNumber(array, num){
+                    array.push(num);//add num to array
+                }
+
+                /* Checks if the user input is invalid
+                 * Displays message if invalid, if not, don't display anything
+                 * @param inputNum: The user input
+                 * @return:  0 if it's an invalid input, 
+                 *           The value if the number is valid      
+                 */
+                function checkNum(num){
+                    //if not a num
+                    if(isNaN(num)){
+                        //Alert User
+                        window.alert("INVALID NUMBER\nInput will now be 0");
+                        return 0;//return 0 for no input
+                    }
+                    return num;//return num from input
+                }
+
+                /* Doubles every third value in the array
+                 * Does this in a new array
+                 * @param array: The original array to use the values to double
+                 * @return doubledArray: The array mirroring the parameter input
+                 *                       with doubled values for every third index
+                 */
+                function doubleEveryThird(array){
+                    var doubledArray = new Array();
+                    //for length of array
+                    for(index = 0; index < array.length; index++){
+                        //value variable to shorten ternary operator length and make line easier to read
+                        var value = array[index];
+                        /*Add doubled value if third element, if not the original number
+                         *(index+1) because of 0-based index, the third index is [2]
+                         * %3 so it will be every multiple of three
+                         * Uses doubledArray not the passed in array
+                         */
+                        doubledArray.push((index +1) % 3 == 0 ? value * 2 : value);
+                    }
+                    return doubledArray;//return array
+                }
+            </script>
+        </head>
+    <body>
+        <h2>Double Every Third Number</h2>
+        <script type="text/javascript"> 
+            //Will prompt user once before asking confirmation
+            do{
+                //Prompt User
+                var userInput = parseFloat( prompt("Enter any number:" , "1"));
+                //Store number in array
+                storeNumber( originalArray, checkNum(userInput) );
+            }while(confirm("Enter Another Number?"));
+            //Display arrays
+            document.write("The original Array: " + originalArray.toString() + "</br>");
+            
+            //double every third index from the array 
+            document.write("The modified Array: " + doubleEveryThird(originalArray).toString() + "</br>");
+        </script>
+    </body>
+</html> 
+
+
+
+

@@ -1,0 +1,117 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111  
+-->
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Extra Credit #2 CSD 111</title>
+    <script>
+        //array of options for AI to choose from
+        var options = new Array("ROCK", "PAPER", "SCISSORS");
+
+        /* Function starts the RPS game. Asks user for input and will have AI 
+         * choose randomly
+         * Then will play the round
+         */
+        function startGame(){
+            //Random number for AI to later be an object
+            var randomComputerChoice = Math.floor(Math.random() * 3);
+            //Prompt user, parse the number and then check the input
+            var choice = checkInput(prompt("Please enter Rock, Paper, or Scissors"));
+            playRound(choice, options[randomComputerChoice]);//play round
+        }
+
+        /* Checks if the user input is invalid
+         * Displays message if invalid, if not, don't display anything
+         * @param inputNum: The users input
+         * @return: Random choice if it's an invalid input, 
+         *          The choice if the number is valid      
+         */
+        function checkInput(input) {
+            //make input all caps for formatting 
+            var formattedInput = input.toUpperCase();
+            //if rock, paper, or scissors
+            if(formattedInput == "ROCK" || formattedInput == "PAPER" 
+                || formattedInput == "SCISSORS"){
+                return formattedInput;   
+            }else{//if not that input throw error and randomly choose object
+                window.alert("INVALID INPUT- Your move will now be randomly chosen\n PLEASE REFRESH PAGE");
+                return options[Math.floor(Math.random() * 3)];
+            }
+            
+        }
+
+        /* This function will play a round of RPS
+         * It updates the choices of objects by the player/computer
+         * and then updates the result box with the result
+         */
+        function playRound(userChoice, computerChoice){
+            //Update Form boxes
+            document.getElementById("ai").value = computerChoice;
+            document.getElementById("user").value = userChoice;
+            alert("Rock, Paper, Scissors, 1-2-3!");
+            //Update form box with the result of the game
+            document.getElementById("result").value = gameLogic(userChoice,computerChoice);
+        }
+
+        /* Function gets the result of a rock paper scissors match
+         * @param user: The users choice of object
+         * @param ai: The computers choice of object
+         * @return: Tie, loss, or win message.
+         */
+        function gameLogic(user, ai){
+            //if Tie
+            if(user == ai){
+                return "That's a draw!";
+            }
+            //each loss pattern
+            if( (user == "ROCK" && ai == "PAPER") || (user == "PAPER" && ai == "SCISSORS")
+                || (user == "SCISSORS" && ai == "ROCK")){
+                return "You Lose. " + ai + " beats " + user;
+            }else{//if you don't tie or lose, you win
+                return "Congratulations! " + user + " beats " + ai;
+            }
+        }
+
+        /* This function will restart the RPS game if the user chooses to do so
+         * If not it will display a message and stop prompting 
+         * @param bool playingAgain: A boolean value returned from the confirm box
+         *                           if the user would like to play again
+         * @return: True if player wants to continue playing
+         *          False if player wants to quit
+         * Function returns for the do-while loop to continue or not
+         */
+        function playAgain(playingAgain){
+            if(playingAgain){
+                startGame();
+            }else{
+                //Display quitting message
+                document.write("<h1>Quit Game </br> Please refresh page if you would like to play again</h1>");
+            }
+            return playingAgain;//return choice
+        }
+
+    </script>
+</head>
+
+<body>
+    <h2>Rock, Paper, Scissors</h2>
+
+    <!--Form of readonly boxes-->
+    <form id="score-board">
+        The AI selected: <input id="ai" name="ai-choice" type="text" size="20" readonly="readonly"/>
+        <br>
+        You chose: <input id="user" name="user-choice" type="text" size="20" readonly="readonly"/>
+        <br>
+        The Game Result:  <input id="result" name="game-result" type="text" size="50" readonly="readonly"/>
+    </form>
+        <script>
+            //Do a round and while the user still wants to play
+            do{
+                startGame();
+            }while(playAgain(confirm("Play Again?")));
+        </script>    
+</body>
+</html>

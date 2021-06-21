@@ -1,0 +1,52 @@
+<!DOCTYPE htm>
+<!-- 
+    David Hartley
+    CSD 111
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Assignment #5 Part One - Ocean Levels</title>
+            <script type="text/javascript">
+                //Constant 1.5 millimeters per year
+                var OCEAN_LEVEL_RISING_PER_YEAR = 1.5;
+
+                /*Function displays the Tables rows and columns of
+                 * the ocean's rising levels
+                 * Loops over 25 years of rising Ocean levels
+                 */
+                function oceanLevels(){             
+                    //For the 1st to 25th year of Ocean levels       
+                    for(var years = 1; years <=25; years++){
+                        document.write("<tr>");//Open row tag
+                        document.write("<td>" +  years + "</td>");
+                        //The ocean rises 1.5 each year. So the year times 1.5 is the amount risen.
+                        document.write("<td>" + (years * OCEAN_LEVEL_RISING_PER_YEAR) + "</td>");
+                        document.write("</tr>");//Close row tag
+                    }
+                }
+            </script>
+        </head>
+    <body>
+
+        <h2>Ocean Levels</h2>
+        <!--Im not too sure why border and align are red on my screen, most likely just teh set color to that function
+            Either way, the code still runs with no errors from the red lines
+        -->
+        <!--Create table-->
+        <table width = "250" border="1">
+            <caption align="top"><b>Ocean Levels Risen over 25 years</b></caption>
+                <tr>
+                    <!--Table Headers-->
+                    <th>Year</th>
+                    <th>Ocean Level Risen (in mL)</th>
+                </tr>
+                <!--Call oceanLevels() function to fill the table-->
+                <script type = "text/javascript"> oceanLevels();</script>
+        </table>
+    </body>
+</html> 
+
+
+
+
